@@ -2,56 +2,50 @@ import sys
 from collections import deque
 
 input = sys.stdin.readline
-#n = 정점 개수, m = 간선 개수, v = 정점 번호
+
 n, m, v = map(int, input().split())
 
-#그래프 초기화
-graph = []
-for i in range(n+1):
-    graph.append([])
-
-#간선 정보 저장(양방향)
-for i in range(m):
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
     a, b = map(int, input().split())
     graph[a].append(b)
     graph[b].append(a)
 
-#그래프 오름차순 정렬
 for i in range(1, n + 1):
     graph[i].sort()
 
 #dfs
-dfs_visited = [False] * (n + 1)
-dfs_result = [] #방문한 결과값을 저장
+dfs_visit = [False] * (n + 1)
+dfs_result = []
 
-def dfs(vtx):
-    dfs_visited[vtx] = True
-    dfs_result.append(vtx)
+def dfs(v):
+    dfs_visit[v] = True
+    dfs_result.append(v)
 
-    for next_vtx in graph[vtx]:
-        if not dfs_visited[next_vtx]:
-            dfs(next_vtx)
+    for next_v in graph[v]:
+        if not dfs_visit[next_v]:
+            dfs(next_v)
 
 #bfs
-bfs_visited = [False] * (n + 1)
+bfs_visit = [False] * (n + 1)
 bfs_result = []
 
 def bfs(start):
     queue = deque()
-    queue.append(start) #시작 좌표
-    bfs_visited[start] = True
+    queue.append(start)
+    bfs_visit[start] = True
 
     while queue:
         current = queue.popleft()
         bfs_result.append(current)
-        
-        for next_vtx in graph[current]:
-            if not bfs_visited[next_vtx]:
-                queue.append(next_vtx)
-                bfs_visited[next_vtx] = True
+        for next_start in graph[current]:
+            if not bfs_visit[next_start]:
+                queue.append(next_start)
+                bfs_visit[next_start] = True
 
 dfs(v)
 bfs(v)
 
-print(" ".join(map(str, dfs_result)))
-print(" ".join(map(str, bfs_result)))
+sys.stdout.write(" ".join(map(str, dfs_result)))
+print()
+sys.stdout.write(" ".join(map(str, bfs_result)))
