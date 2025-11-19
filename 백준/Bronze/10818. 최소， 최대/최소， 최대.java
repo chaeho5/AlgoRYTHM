@@ -1,30 +1,33 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = sc.nextInt();
-        int[] arr = new int[N];
+        int N = Integer.parseInt(br.readLine());
 
-        for(int i = 0; i < N; i++){
-            arr[i] = sc.nextInt();
-        }
+       StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        int max = arr[0];
-        int min = arr[0];
+        int currentNum = Integer.parseInt(st.nextToken());
+        int max = currentNum;
+        int min = currentNum;
 
-        for(int i = 0; i < N; i++){
-            if(arr[i] > max){
-                max = arr[i];
-            }else if(arr[i] < min){
-                min = arr[i];
+        for(int i = 1; i < N; i++){
+            currentNum = Integer.parseInt(st.nextToken());
+
+            if(currentNum > max){
+                max = currentNum;
+            }
+
+            if(currentNum < min){
+                min = currentNum;
             }
         }
 
         System.out.println(min + " " + max);
-
-        sc.close();
     }
 
 }
