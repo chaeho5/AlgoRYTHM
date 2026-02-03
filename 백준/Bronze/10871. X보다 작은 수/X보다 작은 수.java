@@ -1,26 +1,29 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        StringTokenizer nx = new StringTokenizer(br.readLine(), " ");
-        int N = Integer.parseInt(nx.nextToken());
-        int X = Integer.parseInt(nx.nextToken());
-        StringTokenizer num = new StringTokenizer(br.readLine(), " ");
-        int[] A = new int[N];
-        ArrayList<Integer> result = new ArrayList<>();
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        int N = Integer.parseInt(st.nextToken());
+        int X = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine(), " ");
+
+        StringBuilder sb = new StringBuilder();
 
         for(int i = 0; i < N; i++){
-            A[i] = Integer.parseInt(num.nextToken());
-            if(A[i] < X){
-                result.add(A[i]);
+            int num = Integer.parseInt(st.nextToken());
+
+            if(num < X){
+                sb.append(num).append(" ");
             }
         }
 
-        for(int n : result){
-            System.out.print(n + " ");
-        }
+        System.out.println(sb);
     }
 }
