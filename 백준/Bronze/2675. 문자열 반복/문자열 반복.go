@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 var reader = bufio.NewReader(os.Stdin)
@@ -18,9 +19,7 @@ func main() {
 	for i := 0; i < t; i++ {
 		fmt.Fscan(reader, &r, &s)
 		for _, v := range s {
-			for i := 0; i < r; i++ {
-				fmt.Fprintf(writer, "%c", v)
-			}
+			fmt.Fprint(writer, strings.Repeat(string(v), r))
 		}
 		fmt.Fprintln(writer)
 	}
